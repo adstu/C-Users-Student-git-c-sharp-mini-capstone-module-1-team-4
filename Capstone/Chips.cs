@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Capstone
 {
-    public class Chips: VendingMachine
+    public class Chips: Item
     {
         public string Type { get; } = "Chips";
         public decimal Price { get; }
         public string Location { get; }
         public string Name { get; }
-        public int AvailableProduct { get; private set; }
+        public int AvailableProduct { get;  set; }
     }
 }

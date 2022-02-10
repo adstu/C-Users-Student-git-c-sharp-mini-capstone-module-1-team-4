@@ -7,12 +7,12 @@ namespace Capstone
 {
    public class Inventory
     {
-        public Dictionary<string, int> ItemNamePrice(IPurchaseable item)
+        public Dictionary<string, decimal> ItemNamePrice(Item item)
         {
             string filePath = Environment.CurrentDirectory;
             string fileName = "VendingMachineInventory.txt";
             string fullFile = Path.Combine(filePath, fileName);
-            Dictionary<string, int> startingInventory = new Dictionary<string, int>();
+            Dictionary<string, decimal> startingInventory = new Dictionary<string, decimal>();
             try
             {
                 using (StreamReader sr = new StreamReader(fullFile))
@@ -22,7 +22,7 @@ namespace Capstone
                         if (line.Contains(item.Type))
                         {
                             string[] inventoryArray = line.Split('|');
-                            int price = int.Parse(inventoryArray[2]);
+                            decimal price = decimal.Parse(inventoryArray[2]);
                             startingInventory.Add(inventoryArray[1], price);
                         }
                     }
