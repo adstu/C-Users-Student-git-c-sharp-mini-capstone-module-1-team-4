@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Capstone
 {
-    class Gum
+    public class Gum : Candy
     {
+        //public decimal Price { get; }
+        //public string Location { get; }
+        //public string Name { get; }
+        //public int AvailableProduct { get; private set; }
     }
 }

@@ -4,8 +4,11 @@ using System.Text;
 
 namespace Capstone
 {
-    interface IPurchaseable
+   public interface IPurchaseable
     {
-
+        public decimal Price { get; }
+        public string Location { get; }
+        public string Name { get; }
+        public int AvailableProduct { get; set; }
     }
 }
