@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Capstone
 {
-    public  class VendingMachine
+    public class VendingMachine
     {
-        public int UserInput { get; set; }
+        public string UserInput { get; set; }
         public bool IsiItOn { get; set; }
         public Dictionary<string, string> ItemLocation { get; private set; }
-        public decimal AvailableBalance { get; private set; }
+        public decimal AvailableBalance { get; private set; } = 0.00M;
         // display inventory // it will be a derived property.
         //public Dictionary<IPurchasable, int>
 
@@ -19,9 +19,13 @@ namespace Capstone
 
         }
 
-        public void AcceptCurrency()
+        public decimal AcceptCurrency()
         {
-            //Available Balance
+            Console.WriteLine("How much money would you like to add?");
+            string moneyAddedString = Console.ReadLine();
+            decimal moneyAddDecimal = decimal.Parse(moneyAddedString);
+            AvailableBalance += moneyAddDecimal;
+            return AvailableBalance;
         }
         public void DisplayBalance()
         {
@@ -33,7 +37,59 @@ namespace Capstone
         }
         public void MainDisplay()
         {
-            Console.WriteLine($"this.");
+            Console.WriteLine($"(1) Display Vending Machine Items");
+            Console.WriteLine($"(2) Purchase");
+            Console.WriteLine($"(3) Exit");
+            this.UserInput = Console.ReadLine();            
+                if (UserInput == "1")
+                {
+                    //Display Vending Machine Items
+                }
+                else if (UserInput == "2")
+                {
+                    // Purchase Options
+                }
+                else if (UserInput == "3")
+                {
+                    // Exit Application
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input");
+                    MainDisplay();
+                }     
+            
+        }
+        public void PurchaseMenu()
+        {
+            Console.WriteLine("(1) Feed Money");
+            Console.WriteLine("(2) Select Product");
+            Console.WriteLine("(3) Finish Transaction");
+            Console.WriteLine($"Current Money Provided: {this.AvailableBalance}");
+            
+            string UserInput = Console.ReadLine();
+            
+            if (UserInput == "1")
+            {
+                AcceptCurrency();
+            }
+            else if (UserInput == "2")
+            {
+                //Display Inventory
+                string userInputVending = Console.ReadLine();
+                VendItem();
+            }
+            else if (UserInput == "3")
+            {
+                Console.WriteLine("Thank you for your bizznazz!");
+                ReturnChange();
+                MainDisplay();
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input");
+                PurchaseMenu();
+            }
         }
 
     }

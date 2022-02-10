@@ -1,0 +1,21 @@
+Product Type|Name|Price|StockAmount
+Gum|Fruit Stripes|1.00|5
+Gum|Ice Breakers|1.00|5
+Gum|Wrigley's Doublemint|1.00|5
+Gum|Bazooka Joe|0.75|5
+Gum|Dubble Bubble|0.75|5
+Candy|Malley's Pretzel bars|1.25|5
+Candy|Reese|1.25|5
+Candy|Take 5|1.00|5
+Candy|Peanut M&M|1.25|5
+Candy|KitKat|1.25|5
+Chips|Sour Cream & Cheddar Ruffles| 1.50| 5
+Chips|Spicy Sweet Chili Doritos| 1.50| 5
+Chips|Classic Lays|1.50|5
+Chips|Cheetos Cheddar Jalapenos|1.50|5
+Chips|Sun Chips Harvest Cheddar| 1.50|5
+Drink | Bohdi | 5 | 5
+Drink | The Poet | 4 | 5
+Drink | Scrimshaw | 4
+Drink | Founders' Porter | 4
+Drink | Two-Hearted Ale | 4
