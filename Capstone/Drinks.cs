@@ -6,6 +6,7 @@ namespace Capstone
 {
     public class Drinks : VendingMachine
     {
+        public string Type { get; } = "Drink";
         public decimal Price
         {
             get;

@@ -12,20 +12,18 @@ namespace Capstone
         public decimal AvailableBalance { get; private set; } = 0.00M;
         // display inventory // it will be a derived property.
         //public Dictionary<IPurchasable, int>
-
+        
 
         public void VendItem()
         {
 
         }
 
-        public decimal AcceptCurrency()
+        public void AcceptCurrency(decimal dollarAmount)
         {
-            Console.WriteLine("How much money would you like to add?");
-            string moneyAddedString = Console.ReadLine();
-            decimal moneyAddDecimal = decimal.Parse(moneyAddedString);
-            AvailableBalance += moneyAddDecimal;
-            return AvailableBalance;
+            
+           AvailableBalance += dollarAmount;
+            
         }
         public void DisplayBalance()
         {
@@ -44,10 +42,12 @@ namespace Capstone
                 if (UserInput == "1")
                 {
                     //Display Vending Machine Items
+                    
                 }
                 else if (UserInput == "2")
                 {
-                    // Purchase Options
+                // Purchase Options
+                PurchaseMenu();
                 }
                 else if (UserInput == "3")
                 {
@@ -71,7 +71,10 @@ namespace Capstone
             
             if (UserInput == "1")
             {
-                AcceptCurrency();
+                Console.WriteLine("How much money would you like to add?");
+                string moneyAddedString = Console.ReadLine();
+                decimal moneyAddDecimal = decimal.Parse(moneyAddedString);
+                AcceptCurrency(moneyAddDecimal);
             }
             else if (UserInput == "2")
             {
