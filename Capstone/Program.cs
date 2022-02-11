@@ -15,38 +15,10 @@ namespace Capstone
             Console.WriteLine("");
             bool running = true;
             VendingMachine vendoMatic800 = new VendingMachine();
-            vendoMatic800.GenerateInventory();
-
-           
-
-            //Console.WriteLine(candyInventory[0].Name);
-            //Console.WriteLine(candyInventory[1].Name);
-            //Console.WriteLine(candyInventory[2].Name);
-            //Console.WriteLine(candyInventory[3].Name);
-            //Console.WriteLine(candyInventory[4].Name);
-
-            //Console.WriteLine(chipsInventory[0].Name);
-            //Console.WriteLine(chipsInventory[1].Name);
-            //Console.WriteLine(chipsInventory[2].Name);
-            //Console.WriteLine(chipsInventory[3].Name);
-            //Console.WriteLine(chipsInventory[4].Name);
-
-            //Console.WriteLine(drinksInventory[0].Name);
-            //Console.WriteLine(drinksInventory[1].Name);
-            //Console.WriteLine(drinksInventory[2].Name);
-            //Console.WriteLine(drinksInventory[3].Name);
-            //Console.WriteLine(drinksInventory[4].Name);
-
-            //Console.WriteLine(gumInventory[0].Name);
-            //Console.WriteLine(gumInventory[1].Name);
-            //Console.WriteLine(gumInventory[2].Name);
-            //Console.WriteLine(gumInventory[3].Name);
-            //Console.WriteLine(gumInventory[4].Name);
-
-            //string a1 = itemInformation[1];
-            //Console.WriteLine(a1);
-
-
+            vendoMatic800.candyInventory();
+            vendoMatic800.gumInventory();
+            vendoMatic800.drinksInventory();
+            vendoMatic800.chipsInventory();
 
             MainDisplay();
 
@@ -62,7 +34,7 @@ namespace Capstone
                     if (userInput == "1")
                     {
                         //Display Vending Machine Items
-                        vendoMatic800.DisplayInventory();
+                        Console.WriteLine(vendoMatic800.Display);                     
 
                     }
                     else if (userInput == "2")
@@ -101,7 +73,7 @@ namespace Capstone
                 else if (userInput == "2")
                 {
                     //Display Inventory
-                     vendoMatic800.UserInput = Console.ReadLine();
+                    vendoMatic800.UserInput = Console.ReadLine();
                     vendoMatic800.VendItem();
                 }
                 else if (userInput == "3")

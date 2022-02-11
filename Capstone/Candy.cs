@@ -10,7 +10,6 @@ namespace Capstone
         public Candy(string type, decimal price, string location, string name, int availableProduct) : base(type, price, location, name, availableProduct)
         {
             
-        }
-
+        }        
     }
 }
