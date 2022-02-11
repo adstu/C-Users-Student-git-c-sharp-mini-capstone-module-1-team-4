@@ -12,7 +12,6 @@ namespace Capstone
             bool running = true;
             VendingMachine vendoMatic800 = new VendingMachine();
 
-
             string filePath = Environment.CurrentDirectory;
             string fileName = "VendingMachineInventory.txt";
             string fullFile = Path.Combine(filePath, fileName);
@@ -33,11 +32,72 @@ namespace Capstone
             }
             catch (Exception)
             {
-
                 Console.WriteLine("Retrieving file does not exist");
             }
-            string a1 = itemInformation[1];
-            Console.WriteLine(a1);
+
+            List<Candy> candyInventory = new List<Candy>();
+            List<Drinks> drinksInventory = new List<Drinks>();
+            List<Chips> chipsInventory = new List<Chips>();
+            List<Gum> gumInventory = new List<Gum>();
+
+            for (int i = 0; i < itemInformation.Count; i++)
+            {
+                if (itemInformation[i].Contains("Candy"))
+                {
+                    string[] itemArray = itemInformation[i].Split("|");
+                    decimal price = decimal.Parse(itemArray[3]);
+                    int stock = int.Parse(itemArray[4]);                    
+                    candyInventory.Add(new Candy(itemArray[1], price, itemArray[0], itemArray[2], stock));                    
+                }
+                if (itemInformation[i].Contains("Gum"))
+                {
+                    string[] itemArray = itemInformation[i].Split("|");
+                    decimal price = decimal.Parse(itemArray[3]);
+                    int stock = int.Parse(itemArray[4]);
+                    gumInventory.Add(new Gum(itemArray[1], price, itemArray[0], itemArray[2], stock));
+                }
+                if (itemInformation[i].Contains("Chips"))
+                {
+                    string[] itemArray = itemInformation[i].Split("|");
+                    decimal price = decimal.Parse(itemArray[3]);
+                    int stock = int.Parse(itemArray[4]);
+                    chipsInventory.Add(new Chips(itemArray[1], price, itemArray[0], itemArray[2], stock));
+                }
+                if (itemInformation[i].Contains("Drink"))
+                {
+                    string[] itemArray = itemInformation[i].Split("|");
+                    decimal price = decimal.Parse(itemArray[3]);
+                    int stock = int.Parse(itemArray[4]);
+                    drinksInventory.Add(new Drinks(itemArray[1], price, itemArray[0], itemArray[2], stock));
+                }
+            }
+
+            //Console.WriteLine(candyInventory[0].Name);
+            //Console.WriteLine(candyInventory[1].Name);
+            //Console.WriteLine(candyInventory[2].Name);
+            //Console.WriteLine(candyInventory[3].Name);
+            //Console.WriteLine(candyInventory[4].Name);
+
+            //Console.WriteLine(chipsInventory[0].Name);
+            //Console.WriteLine(chipsInventory[1].Name);
+            //Console.WriteLine(chipsInventory[2].Name);
+            //Console.WriteLine(chipsInventory[3].Name);
+            //Console.WriteLine(chipsInventory[4].Name);
+
+            //Console.WriteLine(drinksInventory[0].Name);
+            //Console.WriteLine(drinksInventory[1].Name);
+            //Console.WriteLine(drinksInventory[2].Name);
+            //Console.WriteLine(drinksInventory[3].Name);
+            //Console.WriteLine(drinksInventory[4].Name);
+
+            //Console.WriteLine(gumInventory[0].Name);
+            //Console.WriteLine(gumInventory[1].Name);
+            //Console.WriteLine(gumInventory[2].Name);
+            //Console.WriteLine(gumInventory[3].Name);
+            //Console.WriteLine(gumInventory[4].Name);
+
+            //string a1 = itemInformation[1];
+            //Console.WriteLine(a1);
 
 
 

@@ -6,9 +6,6 @@ namespace Capstone
 {
    public interface IPurchaseable
     {
-       
-
-        public Dictionary<string, decimal> NameAndPrice { get; set; }
-
+    
     }
 }
