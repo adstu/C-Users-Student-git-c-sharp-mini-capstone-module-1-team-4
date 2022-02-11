@@ -12,9 +12,5 @@ namespace Capstone
             
         }
 
-        public List<string[]> ItemInformation()
-        {
-            base.ItemInformation();
-        }
     }
 }
