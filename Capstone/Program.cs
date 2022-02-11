@@ -9,68 +9,15 @@ namespace Capstone
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Welcome to the Umbrella Corp. Vendo-Matic800!");
+            Console.WriteLine("What are ya buyin??");
+            Console.WriteLine(@"/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\");
+            Console.WriteLine("");
             bool running = true;
             VendingMachine vendoMatic800 = new VendingMachine();
+            vendoMatic800.GenerateInventory();
 
-            string filePath = Environment.CurrentDirectory;
-            string fileName = "VendingMachineInventory.txt";
-            string fullFile = Path.Combine(filePath, fileName);
-            List<string> itemInformation = new List<string>();
-
-            try
-            {
-                using (StreamReader sr = new StreamReader(fullFile))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        string line = sr.ReadLine();
-                        itemInformation.Add(line);
-                        Console.WriteLine($"{line}");
-                    }
-                    
-                }
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Retrieving file does not exist");
-            }
-
-            List<Candy> candyInventory = new List<Candy>();
-            List<Drinks> drinksInventory = new List<Drinks>();
-            List<Chips> chipsInventory = new List<Chips>();
-            List<Gum> gumInventory = new List<Gum>();
-
-            for (int i = 0; i < itemInformation.Count; i++)
-            {
-                if (itemInformation[i].Contains("Candy"))
-                {
-                    string[] itemArray = itemInformation[i].Split("|");
-                    decimal price = decimal.Parse(itemArray[3]);
-                    int stock = int.Parse(itemArray[4]);                    
-                    candyInventory.Add(new Candy(itemArray[1], price, itemArray[0], itemArray[2], stock));                    
-                }
-                if (itemInformation[i].Contains("Gum"))
-                {
-                    string[] itemArray = itemInformation[i].Split("|");
-                    decimal price = decimal.Parse(itemArray[3]);
-                    int stock = int.Parse(itemArray[4]);
-                    gumInventory.Add(new Gum(itemArray[1], price, itemArray[0], itemArray[2], stock));
-                }
-                if (itemInformation[i].Contains("Chips"))
-                {
-                    string[] itemArray = itemInformation[i].Split("|");
-                    decimal price = decimal.Parse(itemArray[3]);
-                    int stock = int.Parse(itemArray[4]);
-                    chipsInventory.Add(new Chips(itemArray[1], price, itemArray[0], itemArray[2], stock));
-                }
-                if (itemInformation[i].Contains("Drink"))
-                {
-                    string[] itemArray = itemInformation[i].Split("|");
-                    decimal price = decimal.Parse(itemArray[3]);
-                    int stock = int.Parse(itemArray[4]);
-                    drinksInventory.Add(new Drinks(itemArray[1], price, itemArray[0], itemArray[2], stock));
-                }
-            }
+           
 
             //Console.WriteLine(candyInventory[0].Name);
             //Console.WriteLine(candyInventory[1].Name);
@@ -115,6 +62,7 @@ namespace Capstone
                     if (userInput == "1")
                     {
                         //Display Vending Machine Items
+                        vendoMatic800.DisplayInventory();
 
                     }
                     else if (userInput == "2")
@@ -130,13 +78,12 @@ namespace Capstone
                     else
                     {
                         Console.WriteLine("Invalid Input");
-
                     }
                 }
                 Console.WriteLine("Thank you, please come again!");
             }
 
-
+            
 
             void PurchaseMenu()
             {
@@ -149,23 +96,19 @@ namespace Capstone
 
                 if (userInput == "1")
                 {
-                    Console.WriteLine("How much money would you like to add?");
-                    string moneyAddedString = Console.ReadLine();
-                    decimal moneyAddDecimal = decimal.Parse(moneyAddedString);
-                    vendoMatic800.AcceptCurrency(moneyAddDecimal);
+                    FeedMoney();
                 }
                 else if (userInput == "2")
                 {
                     //Display Inventory
-                    string userInputVending = Console.ReadLine();
+                     vendoMatic800.UserInput = Console.ReadLine();
                     vendoMatic800.VendItem();
                 }
                 else if (userInput == "3")
                 {
-                    Console.WriteLine("Thank you for your bizznazz!");
+                    Console.WriteLine("Heh Heh! Thank ya stranger!");
                     vendoMatic800.ReturnChange();
                     MainDisplay();
-
                 }
                 else
                 {
@@ -173,9 +116,42 @@ namespace Capstone
                     PurchaseMenu();
                 }
 
-
             }
+             void FeedMoney()
+            {
+                Console.WriteLine("How much money would you like to add?");
+                Console.WriteLine("(1) - $1.00");
+                Console.WriteLine("(2) - $2.00");
+                Console.WriteLine("(3) - $5.00");
+                Console.WriteLine("(4) - $10.00");
+                Console.WriteLine("(5) - Done Adding Money");
+                string moneyAddedString = Console.ReadLine();
+                decimal moneyAddDecimal = 0.00M;
 
+                if (moneyAddedString == "1")
+                {
+                    moneyAddDecimal += 1;
+                }
+                if (moneyAddedString == "2")
+                {
+                    moneyAddDecimal += 2;
+                }
+                if (moneyAddedString == "3")
+                {
+                    moneyAddDecimal += 5;
+                }
+                if (moneyAddedString == "4")
+                {
+                    moneyAddDecimal += 10;
+                }
+                if (moneyAddedString == "5")
+                {
+                    PurchaseMenu();
+                }
+                vendoMatic800.AcceptCurrency(moneyAddDecimal);
+                Console.WriteLine("Your Available Balance is " + ("$"+  vendoMatic800.AvailableBalance));
+                FeedMoney();
+            }
 
         }
     }
