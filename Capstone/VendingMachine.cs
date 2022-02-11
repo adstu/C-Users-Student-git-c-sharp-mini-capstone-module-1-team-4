@@ -16,7 +16,12 @@ namespace Capstone
 
         public void VendItem()
         {
-
+            //Dispense Item
+            Console.WriteLine("Please grab your item and enjoy!");
+            //Subtract Item from Inventory
+                //item.stock -= 1;
+            //Subtract cost from Available balance
+                //AvailableBalance -= item.price
         }
 
         public void AcceptCurrency(decimal dollarAmount)
@@ -31,69 +36,51 @@ namespace Capstone
         }
         public void ReturnChange()
         {
-            Console.WriteLine("change");
-        }
-        public void MainDisplay()
-        {
-            Console.WriteLine($"(1) Display Vending Machine Items");
-            Console.WriteLine($"(2) Purchase");
-            Console.WriteLine($"(3) Exit");
-            this.UserInput = Console.ReadLine();            
-                if (UserInput == "1")
+            if (AvailableBalance > 0)
+            {
+                decimal change = AvailableBalance * 100;
+                int newChange = Decimal.ToInt32(change);                               
+
+                if (newChange % 25 != 0)
                 {
-                    //Display Vending Machine Items
-                    
+                    int toDimes = newChange % 25;
+                    int quarters = newChange / 25;
+                    Console.WriteLine(quarters + " quarters are available to grab.");
+                    if (toDimes % 10 != 0)
+                    {
+                        int toNickel = toDimes % 10;
+                        int dimes = toDimes / 10;
+                        Console.WriteLine(dimes + " dimes are available to grab.");
+                        if (toNickel != 0)
+                        {
+                            Console.WriteLine("1 nickel available to grab.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("0 nickel available to grab.");
+                        }
+                    }
+                    else if (newChange % 10 == 0)
+                    {
+
+                        int dimes = newChange / 10;
+                        Console.WriteLine(dimes + " dimes are available to grab.");
+                        Console.WriteLine("0 nickel available to grab.");
+                    }
                 }
-                else if (UserInput == "2")
+                if (newChange % 25 == 0)
                 {
-                // Purchase Options
-                PurchaseMenu();
+
+                    int quarters = newChange / 25;
+                    Console.WriteLine(quarters + " quarters are available to grab.");
+                    Console.WriteLine("0 dimes are available to grab.");
+                    Console.WriteLine("0 nickel available to grab.");
                 }
-                else if (UserInput == "3")
-                {
-                    // Exit Application
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Input");
-                    MainDisplay();
-                }     
-            
+            }
+            AvailableBalance = 0.00M;
+            Console.WriteLine("Please grab your change.");
         }
-        public void PurchaseMenu()
-        {
-            Console.WriteLine("(1) Feed Money");
-            Console.WriteLine("(2) Select Product");
-            Console.WriteLine("(3) Finish Transaction");
-            Console.WriteLine($"Current Money Provided: {this.AvailableBalance}");
-            
-            string UserInput = Console.ReadLine();
-            
-            if (UserInput == "1")
-            {
-                Console.WriteLine("How much money would you like to add?");
-                string moneyAddedString = Console.ReadLine();
-                decimal moneyAddDecimal = decimal.Parse(moneyAddedString);
-                AcceptCurrency(moneyAddDecimal);
-            }
-            else if (UserInput == "2")
-            {
-                //Display Inventory
-                string userInputVending = Console.ReadLine();
-                VendItem();
-            }
-            else if (UserInput == "3")
-            {
-                Console.WriteLine("Thank you for your bizznazz!");
-                ReturnChange();
-                MainDisplay();
-            }
-            else
-            {
-                Console.WriteLine("Invalid Input");
-                PurchaseMenu();
-            }
-        }
+
 
     }
 }
