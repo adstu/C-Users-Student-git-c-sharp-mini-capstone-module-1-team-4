@@ -9,12 +9,13 @@ namespace Capstone
 
         static void Main(string[] args)
         {
+            Inventory inventory = new Inventory();
             Console.WriteLine("Welcome to the Umbrella Corp. Vendo-Matic800!");
             Console.WriteLine("What are ya buyin??");
             Console.WriteLine(@"/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\");
             Console.WriteLine("");
             bool running = true;
-            VendingMachine vendoMatic800 = new VendingMachine();
+            VendingMachine vendoMatic800 = new VendingMachine(inventory);
             vendoMatic800.candyInventory();
             vendoMatic800.gumInventory();
             vendoMatic800.drinksInventory();
@@ -33,7 +34,7 @@ namespace Capstone
                     string userInput = Console.ReadLine();
                     if (userInput == "1")
                     {
-                        vendoMatic800.DisplayInventory();
+                        vendoMatic800.Inventory.DisplayInventory();
                         //Console.WriteLine(vendoMatic800.Inventory);
                         //Display Vending Machine Items
                         //Console.WriteLine(vendoMatic800.Display);                     

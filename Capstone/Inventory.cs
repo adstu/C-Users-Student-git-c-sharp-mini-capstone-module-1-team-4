@@ -7,23 +7,61 @@ namespace Capstone
 {
     public class Inventory : VendingMachine
     {
-        //public Dictionary<string, decimal> ItemNamePrice() { }
+       
+               List<Candy> CandyDisplay
+               {
+                   get
+                   {
+                      return candyInventory();
+                   }
+                   set { }
+               }
+               List<Chips> ChipsDisplay
+               {
+                   get
+                   {
+                       return chipsInventory();
+                   }
+                   set { }
+               }
+               List<Gum> GumDisplay
+               {
+                   get
+                   {
+                       return gumInventory();
+                   }
+                   set { }
+               }
+               List<Drinks> DrinksDisplay
+               {
+                   get
+                   {
+                       return drinksInventory();
+                   }
+                   set { }
+               }
 
-        //public Item GenerateStock(List<string> name)
-        //{
-        //    for (int i = 0; i < name.Count; i++)
-        //    {
-        //        if (name[i].Contains("Candy"))
-        //        {
-        //            string candyArray = name[i].Split("|");
-        //            foreach (string item in candyArray)
-        //            {
+        public void DisplayInventory()
+        {
+            
+            foreach (Item item in GumDisplay)
+            {
+                Console.WriteLine($"{item.Location} {item.Name} {item.Price} {item.AvailableProduct}");
+            }
+            foreach (Item item in CandyDisplay)
+            {
+                Console.WriteLine($"{item.Location} {item.Name} {item.Price} {item.AvailableProduct}");
+            }
+            foreach (Item item in ChipsDisplay)
+            {
+                Console.WriteLine($"{item.Location} {item.Name} {item.Price} {item.AvailableProduct}");
+            }
+            foreach (Item item in DrinksDisplay)
+            {
+                Console.WriteLine($"{item.Location} {item.Name} {item.Price} {item.AvailableProduct}");
+            }
 
-        //            }
-        //        }
-        //    }
-
-        //}
+        }
 
     }
 }

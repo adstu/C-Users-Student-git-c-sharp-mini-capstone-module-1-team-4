@@ -9,10 +9,15 @@ namespace Capstone
     {
         public string UserInput { get; set; }
         public bool IsiItOn { get; set; }
-        public Dictionary<Item, Item> ItemLocation { get; private set; }
+        //public Dictionary<Item, Item> ItemLocation { get; private set; }
         public decimal AvailableBalance { get; private set; } = 0.00M;
-        public List<IPurchaseable> Inventory { get; set; }
+        public Inventory Inventory { get; set; }
 
+
+        public VendingMachine(Inventory inventory)
+        {
+            this.Inventory = inventory;
+        }
         // display inventory // it will be a derived property.
         //public string Display
         //{
@@ -27,17 +32,7 @@ namespace Capstone
 
         //public Dictionary<IPurchasable, int>
 
-        public void DisplayInventory()
-        {
-            List<Candy> candyDisplay = candyInventory();
-            IPurchaseable[] itemDisplay = new IPurchaseable[] { new Chips() };
-            
-            foreach (Item item in itemDisplay)
-            {
-                Console.WriteLine($"{item.Location} {item.Name} {item.Price} {item.AvailableProduct}");
-            }
-
-        }
+        
         public void AcceptCurrency(decimal dollarAmount)
         {
 
