@@ -7,10 +7,14 @@ namespace Capstone
 {
    public class Candy :Item
     {
-        public string Type { get; } = "Candy";
-        public string Location { get; }
-        public int AvailableProduct { get;  set; }
-        public Dictionary<string, decimal> NameAndPrice { get; set; }
+        public Candy(string type, decimal price, string location, string name, int availableProduct) : base(type, price, location, name, availableProduct)
+        {
+            
+        }
 
+        public List<string[]> ItemInformation()
+        {
+            base.ItemInformation();
+        }
     }
 }

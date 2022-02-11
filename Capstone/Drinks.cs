@@ -6,22 +6,9 @@ namespace Capstone
 {
     public class Drinks : Item
     {
-        public string Type { get; } = "Drink";
-        public decimal Price
+        public Drinks(string type, decimal price, string location, string name, int availableProduct) : base(type, price, location, name , availableProduct)
         {
-            get;
-        }
-        public string Location
-        {
-            get;
-        }
-        public string Name
-        {
-            get;
-        }
-        public int AvailableProduct
-        {
-            get;  set;
+           
         }
     }
 }

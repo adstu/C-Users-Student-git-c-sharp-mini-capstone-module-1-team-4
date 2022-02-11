@@ -12,7 +12,7 @@ namespace Capstone
             VendingMachine vendoMatic800 = new VendingMachine();
             MainDisplay();
 
-
+            
             void MainDisplay()
             {
                 while (running)

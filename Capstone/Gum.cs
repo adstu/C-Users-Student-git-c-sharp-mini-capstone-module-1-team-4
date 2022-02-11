@@ -6,10 +6,9 @@ namespace Capstone
 {
     public class Gum : Candy
     {
-        //public string Type { get; } = "Gum";
-        //public decimal Price { get; }
-        //public string Location { get; }
-        //public string Name { get; }
-        //public int AvailableProduct { get; private set; }
+        public Gum(string type, decimal price, string location, string name, int availableProduct) : base(type, price, location, name, availableProduct)
+        {
+
+        }
     }
 }

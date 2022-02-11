@@ -6,10 +6,9 @@ namespace Capstone
 {
     public class Chips: Item
     {
-        public string Type { get; } = "Chips";
-        public decimal Price { get; }
-        public string Location { get; }
-        public string Name { get; }
-        public int AvailableProduct { get;  set; }
+        public Chips(string type, decimal price, string location, string name, int availableProduct) : base(type, price, location, name, availableProduct)
+        {
+
+        }
     }
 }
