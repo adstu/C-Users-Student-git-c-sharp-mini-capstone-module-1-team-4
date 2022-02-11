@@ -33,8 +33,10 @@ namespace Capstone
                     string userInput = Console.ReadLine();
                     if (userInput == "1")
                     {
+                        vendoMatic800.DisplayInventory();
+                        //Console.WriteLine(vendoMatic800.Inventory);
                         //Display Vending Machine Items
-                        Console.WriteLine(vendoMatic800.Display);                     
+                        //Console.WriteLine(vendoMatic800.Display);                     
 
                     }
                     else if (userInput == "2")

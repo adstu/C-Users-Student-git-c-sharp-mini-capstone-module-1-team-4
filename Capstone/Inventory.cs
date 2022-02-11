@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Capstone
 {
-    public class Inventory
+    public class Inventory : VendingMachine
     {
         //public Dictionary<string, decimal> ItemNamePrice() { }
 

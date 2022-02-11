@@ -11,28 +11,32 @@ namespace Capstone
         public bool IsiItOn { get; set; }
         public Dictionary<Item, Item> ItemLocation { get; private set; }
         public decimal AvailableBalance { get; private set; } = 0.00M;
+        public List<IPurchaseable> Inventory { get; set; }
+
         // display inventory // it will be a derived property.
-        public string Display
-        {
-            get
-            {
-                string display = DisplayInventory();
-                return display;
-            }
-            private set { }
-        }
+        //public string Display
+        //{
+        //    get
+        //    {
+        //        string display = DisplayInventory();
+        //        return display;
+        //    }
+        //    private set { }
+        //}
 
 
         //public Dictionary<IPurchasable, int>
 
         public void DisplayInventory()
         {
-            List<string> itemInformation = ImportInventory();
-
-            foreach (string item in itemInformation)
+            List<Candy> candyDisplay = candyInventory();
+            IPurchaseable[] itemDisplay = new IPurchaseable[] { new Chips() };
+            
+            foreach (Item item in itemDisplay)
             {
-                Console.WriteLine(item);
+                Console.WriteLine($"{item.Location} {item.Name} {item.Price} {item.AvailableProduct}");
             }
+
         }
         public void AcceptCurrency(decimal dollarAmount)
         {
@@ -90,6 +94,7 @@ namespace Capstone
                     decimal price = decimal.Parse(itemArray[3]);
                     int stock = int.Parse(itemArray[4]);
                     candyInventory.Add(new Candy(itemArray[1], price, itemArray[0], itemArray[2], stock));
+                   
                 }
             }
             return candyInventory;
@@ -107,6 +112,7 @@ namespace Capstone
                     decimal price = decimal.Parse(itemArray[3]);
                     int stock = int.Parse(itemArray[4]);
                     gumInventory.Add(new Gum(itemArray[1], price, itemArray[0], itemArray[2], stock));
+                    
 
                 }
             }
@@ -125,6 +131,7 @@ namespace Capstone
                     decimal price = decimal.Parse(itemArray[3]);
                     int stock = int.Parse(itemArray[4]);
                     chipsInventory.Add(new Chips(itemArray[1], price, itemArray[0], itemArray[2], stock));
+                    
                 }
             }
             return chipsInventory;
@@ -142,6 +149,8 @@ namespace Capstone
                     decimal price = decimal.Parse(itemArray[3]);
                     int stock = int.Parse(itemArray[4]);
                     drinksInventory.Add(new Drinks(itemArray[1], price, itemArray[0], itemArray[2], stock));
+                    
+
                 }
             }
             return drinksInventory;
