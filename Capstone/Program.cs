@@ -27,7 +27,7 @@ namespace Capstone
 
 
             void MainDisplay()
-            {
+            {  
                 while (running)
                 {
                     Console.WriteLine($"(1) Display Vending Machine Items");
@@ -36,9 +36,12 @@ namespace Capstone
                     string userInput = Console.ReadLine();
                     if (userInput == "1")
                     {
-                                         
+                        Console.Clear();
+                        Console.WriteLine("********************************************************************");
                         vendoMatic800.DisplayInventory();
-                                        
+                        Console.WriteLine("********************************************************************");
+                        Console.WriteLine("You hear a rustling behind you, hurry up!");
+                        Console.WriteLine("********************************************************************");
 
                     }
                     else if (userInput == "2")
@@ -58,14 +61,14 @@ namespace Capstone
                 }
                 Console.WriteLine("Thank you, please come again!");
             }
-            
 
+            System.Environment.Exit(0);
             void PurchaseMenu()
             {
                 Console.WriteLine("(1) Feed Money");
                 Console.WriteLine("(2) Select Product");
                 Console.WriteLine("(3) Finish Transaction");
-                Console.WriteLine($"Current Money Provided: {vendoMatic800.AvailableBalance}");
+                Console.WriteLine($"Current Money Provided: ${vendoMatic800.AvailableBalance}");
 
                 string userInput = Console.ReadLine();
 
@@ -131,6 +134,7 @@ namespace Capstone
                 }
                 vendoMatic800.AcceptCurrency(moneyAddDecimal);
                 Console.WriteLine("Your Available Balance is " + ("$" + vendoMatic800.AvailableBalance));
+                vendoMatic800.Audit($"{DateTime.Now} FEED MONEY: ${moneyAddDecimal} ${vendoMatic800.AvailableBalance}");
                 FeedMoney();
             }
 

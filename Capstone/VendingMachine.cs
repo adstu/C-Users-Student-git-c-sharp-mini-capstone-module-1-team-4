@@ -27,7 +27,7 @@ namespace Capstone
         }
         public void DisplayBalance()
         {
-            Console.WriteLine(this.AvailableBalance);
+            Console.WriteLine("$"+ this.AvailableBalance);
         }
 
         public static List<string> ImportInventory()
@@ -140,7 +140,7 @@ namespace Capstone
             //item.stock -= 1;
             //Subtract cost from Available balance
             //AvailableBalance -= item.price
-
+            bool validInput = false;
             //Dispense Item
             List<Gum> gumList = gumInventory();
             List<Chips> chipsList = chipsInventory();
@@ -152,14 +152,17 @@ namespace Capstone
             {
                 if (UserInput == item.Location)
                 {
+                    validInput = true;
                     if (AvailableBalance >= item.Price)
                     {
+                        
                         if (Inventory.stockDictionary[UserInput] != 0)
                         {
                             item.AvailableProduct -= 1;
                             UpdateStock(UserInput);
                             AvailableBalance -= item.Price;
                             Console.WriteLine("Munch Munch, Yum!");
+                            Audit($"{DateTime.Now}  {item.Name} {item.Location} ${AvailableBalance + item.Price} ${AvailableBalance}");
                         }                            
                         else
                         {
@@ -179,13 +182,16 @@ namespace Capstone
             {
                 if (UserInput == item.Location)
                 {
+                    validInput = true;
                     if (AvailableBalance >= item.Price)
                     {
+                       
                         if (Inventory.stockDictionary[UserInput] != 0)
                         {
                             UpdateStock(UserInput);
                             AvailableBalance -= item.Price;
-                            Console.WriteLine("Glug Glug, Yum!");
+                            Console.WriteLine("You crack open a cold one with the boys");
+                            Audit($"{DateTime.Now}  {item.Name} {item.Location} ${AvailableBalance + item.Price} ${AvailableBalance}");
                         }
                         else
                         {
@@ -204,13 +210,17 @@ namespace Capstone
             {
                 if (UserInput == item.Location)
                 {
+                    validInput = true;
                     if (AvailableBalance >= item.Price)
                     {
+                        
                         if (Inventory.stockDictionary[UserInput] != 0)
                         {
+                            
                             UpdateStock(UserInput);
                             AvailableBalance -= item.Price;
                             Console.WriteLine("Crunch Crunch, Yum!");
+                            Audit($"{DateTime.Now}  {item.Name} {item.Location} ${AvailableBalance + item.Price} ${AvailableBalance}");
                         }
                         else
                         {
@@ -230,6 +240,7 @@ namespace Capstone
             {
                 if (UserInput == item.Location)
                 {
+                    validInput = true;
                     if (AvailableBalance >= item.Price)
                     {
                         if (Inventory.stockDictionary[UserInput] != 0)
@@ -237,6 +248,7 @@ namespace Capstone
                             UpdateStock(UserInput);
                             AvailableBalance -= item.Price;
                             Console.WriteLine("Chew Chew, Yum!");
+                            Audit($"{DateTime.Now}  {item.Name} {item.Location} ${AvailableBalance + item.Price} ${AvailableBalance}");
                         }
                         else
                         {
@@ -249,7 +261,11 @@ namespace Capstone
                     }
                 }
                 i++;
-            }            
+            }        
+            if (!validInput)
+            {
+                Console.WriteLine("INVALID INPUT, STRANGER");
+            }
         }
 
         public void ReturnChange()
@@ -295,8 +311,20 @@ namespace Capstone
                     Console.WriteLine("0 nickel available to grab.");
                 }
             }
+            Audit($"{DateTime.Now} GIVE CHANGE: {AvailableBalance} $0.00");
             AvailableBalance = 0.00M;
             Console.WriteLine("Please grab your change.");
+        }
+        public void Audit(string transaction) 
+
+        {
+            string filePath = Environment.CurrentDirectory;
+            string transactionAudit = "Transaction_Audit.txt";
+            string fullFile = Path.Combine(filePath, transactionAudit);
+            using (StreamWriter sw = new StreamWriter (fullFile, true))
+            {
+                sw.WriteLine(transaction);
+            }
         }
 
 
