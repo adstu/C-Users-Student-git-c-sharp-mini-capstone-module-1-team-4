@@ -81,7 +81,7 @@ namespace Capstone
                     //Display Inventory
                     vendoMatic800.DisplayInventory();
                     vendoMatic800.UserInput = Console.ReadLine();
-                    vendoMatic800.VendItem();                    
+                    vendoMatic800.VendItem(vendoMatic800.UserInput);                    
                     PurchaseMenu();
                 }
                 else if (userInput == "3")

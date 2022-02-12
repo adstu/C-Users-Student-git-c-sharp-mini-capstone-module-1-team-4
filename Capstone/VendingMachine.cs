@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+
 namespace Capstone
 {
     public class VendingMachine
     {
+        private static object mainProjDir;
+
         public string UserInput { get; set; }
         public bool IsiItOn { get; set; }
         //public Dictionary<Item, Item> ItemLocation { get; private set; }
         public decimal AvailableBalance { get; set; } = 0.00M;
         //public Inventory Inventory { get; set; }
+
+        public int Quarters { get; set; }
 
         public virtual void DisplayInventory() { }
 
@@ -32,14 +37,14 @@ namespace Capstone
 
         public static List<string> ImportInventory()
         {
-            string filePath = Environment.CurrentDirectory;
-            string fileName = "VendingMachineInventory.txt";
-            string fullFile = Path.Combine(filePath, fileName);
+            string filePath = $"{mainProjDir}/Capstone/VendingMachineInventory.txt";
+            
+            
             List<string> itemInformation = new List<string>();
 
             try
             {
-                using (StreamReader sr = new StreamReader(fullFile))
+                using (StreamReader sr = new StreamReader(filePath))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -134,7 +139,7 @@ namespace Capstone
             return drinksInventory;
         }
 
-        public void VendItem()
+        public void VendItem(string userInput)
         {
             //Subtract Item from Inventory
             //item.stock -= 1;
@@ -172,7 +177,7 @@ namespace Capstone
                     }
                     else
                     {
-                        Console.WriteLine("You don't have enough money you POS");
+                        Console.WriteLine("You don't have enough money.");
                     }
                 }
                 i++;
@@ -201,7 +206,7 @@ namespace Capstone
                     }
                     else
                     {
-                        Console.WriteLine("You don't have enough money you POS");
+                        Console.WriteLine("You don't have enough money.");
                     }
                 }
                 i++;
@@ -230,7 +235,7 @@ namespace Capstone
                     }
                     else
                     {
-                        Console.WriteLine("You don't have enough money you POS");
+                        Console.WriteLine("You don't have enough money.");
                     }
                     i++;
                 }
@@ -257,7 +262,7 @@ namespace Capstone
                     }
                     else
                     {
-                        Console.WriteLine("You don't have enough money you POS");
+                        Console.WriteLine("You don't have enough money.");
                     }
                 }
                 i++;
@@ -278,8 +283,8 @@ namespace Capstone
                 if (newChange % 25 != 0)
                 {
                     int toDimes = newChange % 25;
-                    int quarters = newChange / 25;
-                    Console.WriteLine(quarters + " quarters are available to grab.");
+                    Quarters = newChange / 25;
+                    Console.WriteLine(Quarters + " quarters are available to grab.");
                     if (toDimes % 10 != 0)
                     {
                         int toNickel = toDimes % 10;
@@ -305,8 +310,8 @@ namespace Capstone
                 if (newChange % 25 == 0)
                 {
 
-                    int quarters = newChange / 25;
-                    Console.WriteLine(quarters + " quarters are available to grab.");
+                    Quarters = newChange / 25;
+                    Console.WriteLine(Quarters + " quarters are available to grab.");
                     Console.WriteLine("0 dimes are available to grab.");
                     Console.WriteLine("0 nickel available to grab.");
                 }
