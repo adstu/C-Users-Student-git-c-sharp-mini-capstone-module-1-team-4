@@ -10,7 +10,7 @@ namespace Capstone
         public string UserInput { get; set; }
         public bool IsiItOn { get; set; }
         //public Dictionary<Item, Item> ItemLocation { get; private set; }
-        public decimal AvailableBalance { get; private set; } = 0.00M;
+        public decimal AvailableBalance { get; set; } = 0.00M;
         //public Inventory Inventory { get; set; }
 
         public virtual void DisplayInventory() { }
