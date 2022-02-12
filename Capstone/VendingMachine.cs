@@ -11,28 +11,14 @@ namespace Capstone
         public bool IsiItOn { get; set; }
         //public Dictionary<Item, Item> ItemLocation { get; private set; }
         public decimal AvailableBalance { get; private set; } = 0.00M;
-        public Inventory Inventory { get; set; }
+        //public Inventory Inventory { get; set; }
 
+        public virtual void DisplayInventory() { }
 
-        public VendingMachine(Inventory inventory)
-        {
-            this.Inventory = inventory;
-        }
-        // display inventory // it will be a derived property.
-        //public string Display
-        //{
-        //    get
-        //    {
-        //        string display = DisplayInventory();
-        //        return display;
-        //    }
-        //    private set { }
-        //}
+        public virtual void AssignStock() { }
 
+        public virtual void UpdateStock(string UserInput) { }
 
-        //public Dictionary<IPurchasable, int>
-
-        
         public void AcceptCurrency(decimal dollarAmount)
         {
 
@@ -44,10 +30,7 @@ namespace Capstone
             Console.WriteLine(this.AvailableBalance);
         }
 
-
-
-
-        public List<string> ImportInventory()
+        public static List<string> ImportInventory()
         {
             string filePath = Environment.CurrentDirectory;
             string fileName = "VendingMachineInventory.txt";
@@ -74,7 +57,7 @@ namespace Capstone
             return itemInformation;
         }
 
-        public List<Candy> candyInventory()
+        public static List<Candy> candyInventory()
         {
             List<string> itemInformation = ImportInventory();
 
@@ -89,13 +72,13 @@ namespace Capstone
                     decimal price = decimal.Parse(itemArray[3]);
                     int stock = int.Parse(itemArray[4]);
                     candyInventory.Add(new Candy(itemArray[1], price, itemArray[0], itemArray[2], stock));
-                   
+
                 }
             }
             return candyInventory;
         }
 
-        public List<Gum> gumInventory()
+        public static List<Gum> gumInventory()
         {
             List<string> itemInformation = ImportInventory();
             List<Gum> gumInventory = new List<Gum>();
@@ -107,14 +90,14 @@ namespace Capstone
                     decimal price = decimal.Parse(itemArray[3]);
                     int stock = int.Parse(itemArray[4]);
                     gumInventory.Add(new Gum(itemArray[1], price, itemArray[0], itemArray[2], stock));
-                    
+
 
                 }
             }
             return gumInventory;
         }
 
-        public List<Chips> chipsInventory()
+        public static List<Chips> chipsInventory()
         {
             List<string> itemInformation = ImportInventory();
             List<Chips> chipsInventory = new List<Chips>();
@@ -126,13 +109,13 @@ namespace Capstone
                     decimal price = decimal.Parse(itemArray[3]);
                     int stock = int.Parse(itemArray[4]);
                     chipsInventory.Add(new Chips(itemArray[1], price, itemArray[0], itemArray[2], stock));
-                    
+
                 }
             }
             return chipsInventory;
         }
 
-        public List<Drinks> drinksInventory()
+        public static List<Drinks> drinksInventory()
         {
             List<string> itemInformation = ImportInventory();
             List<Drinks> drinksInventory = new List<Drinks>();
@@ -144,7 +127,7 @@ namespace Capstone
                     decimal price = decimal.Parse(itemArray[3]);
                     int stock = int.Parse(itemArray[4]);
                     drinksInventory.Add(new Drinks(itemArray[1], price, itemArray[0], itemArray[2], stock));
-                    
+
 
                 }
             }
@@ -158,27 +141,39 @@ namespace Capstone
             //Subtract cost from Available balance
             //AvailableBalance -= item.price
 
+            //Dispense Item
             List<Gum> gumList = gumInventory();
             List<Chips> chipsList = chipsInventory();
             List<Drinks> drinkList = drinksInventory();
             List<Candy> candyList = candyInventory();
-            //Dispense Item
+
+            int i = 0;
             foreach (Candy item in candyList)
             {
                 if (UserInput == item.Location)
                 {
                     if (AvailableBalance >= item.Price)
                     {
-                        item.AvailableProduct -= 1;
-                        AvailableBalance -= item.Price;
-                        Console.WriteLine("Candy Message");
+                        if (Inventory.stockDictionary[UserInput] != 0)
+                        {
+                            item.AvailableProduct -= 1;
+                            UpdateStock(UserInput);
+                            AvailableBalance -= item.Price;
+                            Console.WriteLine("Munch Munch, Yum!");
+                        }                            
+                        else
+                        {
+                            Console.WriteLine("The item you selected is sold out.");
+                        }
+
                     }
                     else
                     {
                         Console.WriteLine("You don't have enough money you POS");
                     }
                 }
-
+                i++;
+                //Inventory.CandyDisplay[i].AvailableProduct = candyList[i].AvailableProduct;
             }
             foreach (Drinks item in drinkList)
             {
@@ -186,16 +181,24 @@ namespace Capstone
                 {
                     if (AvailableBalance >= item.Price)
                     {
-                        item.AvailableProduct -= 1;
-                        AvailableBalance -= item.Price;
-                        Console.WriteLine("Candy Message");
+                        if (Inventory.stockDictionary[UserInput] != 0)
+                        {
+                            UpdateStock(UserInput);
+                            AvailableBalance -= item.Price;
+                            Console.WriteLine("Glug Glug, Yum!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The item you selected is sold out.");
+                        }
+
                     }
                     else
                     {
                         Console.WriteLine("You don't have enough money you POS");
                     }
                 }
-
+                i++;
             }
             foreach (Chips item in chipsList)
             {
@@ -203,35 +206,50 @@ namespace Capstone
                 {
                     if (AvailableBalance >= item.Price)
                     {
-                        item.AvailableProduct -= 1;
-                        AvailableBalance -= item.Price;
-                        Console.WriteLine("Candy Message");
+                        if (Inventory.stockDictionary[UserInput] != 0)
+                        {
+                            UpdateStock(UserInput);
+                            AvailableBalance -= item.Price;
+                            Console.WriteLine("Crunch Crunch, Yum!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The item you selected is sold out.");
+                        }
+
                     }
                     else
                     {
                         Console.WriteLine("You don't have enough money you POS");
                     }
+                    i++;
                 }
-
             }
+
             foreach (Gum item in gumList)
             {
                 if (UserInput == item.Location)
                 {
                     if (AvailableBalance >= item.Price)
                     {
-                        item.AvailableProduct -= 1;
-                        AvailableBalance -= item.Price;
-                        Console.WriteLine("Candy Message");
+                        if (Inventory.stockDictionary[UserInput] != 0)
+                        {                            
+                            UpdateStock(UserInput);
+                            AvailableBalance -= item.Price;
+                            Console.WriteLine("Chew Chew, Yum!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The item you selected is sold out.");
+                        }
                     }
                     else
                     {
                         Console.WriteLine("You don't have enough money you POS");
                     }
                 }
-
-            }
-            Console.WriteLine("Please grab your item and enjoy!");
+                i++;
+            }            
         }
 
         public void ReturnChange()
@@ -280,6 +298,13 @@ namespace Capstone
             AvailableBalance = 0.00M;
             Console.WriteLine("Please grab your change.");
         }
+
+
+
+
+
+
+
 
 
     }

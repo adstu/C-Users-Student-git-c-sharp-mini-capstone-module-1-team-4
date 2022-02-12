@@ -9,17 +9,19 @@ namespace Capstone
 
         static void Main(string[] args)
         {
-            Inventory inventory = new Inventory();
+            
             Console.WriteLine("Welcome to the Umbrella Corp. Vendo-Matic800!");
             Console.WriteLine("What are ya buyin??");
             Console.WriteLine(@"/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\");
             Console.WriteLine("");
             bool running = true;
-            VendingMachine vendoMatic800 = new VendingMachine(inventory);
-            vendoMatic800.candyInventory();
-            vendoMatic800.gumInventory();
-            vendoMatic800.drinksInventory();
-            vendoMatic800.chipsInventory();
+            VendingMachine vendoMatic800 = new Inventory();
+            vendoMatic800.AssignStock();
+            //vendoMatic800.DisplayInventory();
+            //vendoMatic800.candyInventory();
+            //vendoMatic800.gumInventory();
+            //vendoMatic800.drinksInventory();
+            //vendoMatic800.chipsInventory();
 
             MainDisplay();
 
@@ -34,10 +36,9 @@ namespace Capstone
                     string userInput = Console.ReadLine();
                     if (userInput == "1")
                     {
-                        vendoMatic800.Inventory.DisplayInventory();
-                        //Console.WriteLine(vendoMatic800.Inventory);
-                        //Display Vending Machine Items
-                        //Console.WriteLine(vendoMatic800.Display);                     
+                                         
+                        vendoMatic800.DisplayInventory();
+                                        
 
                     }
                     else if (userInput == "2")
@@ -57,7 +58,6 @@ namespace Capstone
                 }
                 Console.WriteLine("Thank you, please come again!");
             }
-
             
 
             void PurchaseMenu()
@@ -76,14 +76,20 @@ namespace Capstone
                 else if (userInput == "2")
                 {
                     //Display Inventory
+                    vendoMatic800.DisplayInventory();
                     vendoMatic800.UserInput = Console.ReadLine();
-                    vendoMatic800.VendItem();
+                    vendoMatic800.VendItem();                    
+                    PurchaseMenu();
                 }
                 else if (userInput == "3")
                 {
                     Console.WriteLine("Heh Heh! Thank ya stranger!");
                     vendoMatic800.ReturnChange();
                     MainDisplay();
+                }
+                else if(userInput == "4")
+                {
+                    Console.WriteLine("THIS SHOULD WRITE A SALES REPORT");
                 }
                 else
                 {
@@ -92,7 +98,7 @@ namespace Capstone
                 }
 
             }
-             void FeedMoney()
+            void FeedMoney()
             {
                 Console.WriteLine("How much money would you like to add?");
                 Console.WriteLine("(1) - $1.00");
@@ -124,7 +130,7 @@ namespace Capstone
                     PurchaseMenu();
                 }
                 vendoMatic800.AcceptCurrency(moneyAddDecimal);
-                Console.WriteLine("Your Available Balance is " + ("$"+  vendoMatic800.AvailableBalance));
+                Console.WriteLine("Your Available Balance is " + ("$" + vendoMatic800.AvailableBalance));
                 FeedMoney();
             }
 
