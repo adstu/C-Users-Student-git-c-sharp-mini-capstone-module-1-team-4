@@ -110,7 +110,6 @@ namespace CapstoneTests
             //Arrange
             VendingMachine vendingMachine = new VendingMachine() { };
             Inventory inventory = new Inventory();
-            //Gum gum = new Gum("name", 1.00M, "A1", "name", 5 );
 
             vendingMachine.UserInput = "A1";
             vendingMachine.AvailableBalance = 1.15M;
@@ -125,16 +124,86 @@ namespace CapstoneTests
             Assert.AreEqual(.15M, vendingMachine.AvailableBalance);
         }
 
+        [TestMethod]
+        [DeploymentItem(@"C:\Users\Student\git\c-sharp-mini-capstone-module-1-team-4\Capstone\bin\Debug\netcoreapp3.1\VendingMachineInventory.txt")]
+        public void VendingItem_Candy()
+        {
+
+            //Arrange
+            VendingMachine vendingMachine = new VendingMachine() { };
+            Inventory inventory = new Inventory();
+
+            vendingMachine.UserInput = "B1";
+            vendingMachine.AvailableBalance = 2.00M;
+            vendingMachine.IsiItOn = true;
+
+            //Act
+            inventory.AssignStock();
+            vendingMachine.VendItem(vendingMachine.UserInput);
+
+            //Assert
+
+            Assert.AreEqual(.75M, vendingMachine.AvailableBalance);
+        }
+
+
+
+        [TestMethod]
+        [DeploymentItem(@"C:\Users\Student\git\c-sharp-mini-capstone-module-1-team-4\Capstone\bin\Debug\netcoreapp3.1\VendingMachineInventory.txt")]
+        public void VendingItem_Chips()
+        {
+
+            //Arrange
+            VendingMachine vendingMachine = new VendingMachine() { };
+            Inventory inventory = new Inventory();
+
+            vendingMachine.UserInput = "C1";
+            vendingMachine.AvailableBalance = 2.00M;
+            vendingMachine.IsiItOn = true;
+
+            //Act
+            inventory.AssignStock();
+            vendingMachine.VendItem(vendingMachine.UserInput);
+
+            //Assert
+
+            Assert.AreEqual(.50M, vendingMachine.AvailableBalance);
+        }
+
+
+
+        [TestMethod]
+        [DeploymentItem(@"C:\Users\Student\git\c-sharp-mini-capstone-module-1-team-4\Capstone\bin\Debug\netcoreapp3.1\VendingMachineInventory.txt")]
+        public void VendingItem_Drinks()
+        {
+
+            //Arrange
+            VendingMachine vendingMachine = new VendingMachine() { };
+            Inventory inventory = new Inventory();
+
+            vendingMachine.UserInput = "D1";
+            vendingMachine.AvailableBalance = 6.00M;
+            vendingMachine.IsiItOn = true;
+
+            //Act
+            inventory.AssignStock();
+            vendingMachine.VendItem(vendingMachine.UserInput);
+
+            //Assert
+
+            Assert.AreEqual(1.00M, vendingMachine.AvailableBalance);
+        }
+
         //[TestMethod]
         //public void VendingItem_wrongCode()
         //{
         //    //Arrange
         //    VendingMachine vendingMachine = new VendingMachine() { };
         //    vendingMachine.UserInput = "F1";
-        //    string results = 
+
 
         //    //Act
-        //    vendingMachine.VendItem();
+        //    vendingMachine.VendItem(vendingMachine.UserInput);
 
 
 

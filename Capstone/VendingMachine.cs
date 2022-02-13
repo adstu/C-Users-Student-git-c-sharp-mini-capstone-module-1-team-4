@@ -9,7 +9,7 @@ namespace Capstone
     public class VendingMachine
     {
         private static object mainProjDir;
-
+        public Inventory Stock { get; set; }
         public string UserInput { get; set; }
         public bool IsiItOn { get; set; }
         //public Dictionary<Item, Item> ItemLocation { get; private set; }
