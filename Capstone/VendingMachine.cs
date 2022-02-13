@@ -8,22 +8,21 @@ namespace Capstone
 {
     public class VendingMachine
     {
-        private static object mainProjDir;
-        public Inventory Stock { get; set; }
+        
+        public Inventory Stock { get {
+                Inventory stock = new Inventory();
+                    return stock; } set { } }
         public string UserInput { get; set; }
         public bool IsiItOn { get; set; }
-        //public Dictionary<Item, Item> ItemLocation { get; private set; }
+
         public decimal AvailableBalance { get; set; } = 0.00M;
-        //public Inventory Inventory { get; set; }
+        
+
 
         public int Quarters { get; set; }
         public int Nickel { get; set; }
         public int Dimes { get; set; }
         public virtual void DisplayInventory() { }
-
-        public virtual void AssignStock() { }
-
-        public virtual void UpdateStock(string UserInput) { }
 
         public void AcceptCurrency(decimal dollarAmount)
         {
@@ -167,7 +166,7 @@ namespace Capstone
                         if (Inventory.stockDictionary[UserInput] != 0)
                         {
                             item.AvailableProduct -= 1;
-                            UpdateStock(UserInput);
+                            Stock.UpdateStock(UserInput);
                             AvailableBalance -= item.Price;
                             Console.WriteLine("Munch Munch, Yum!");
                             Audit($"{DateTime.Now}  {item.Name} {item.Location} ${AvailableBalance + item.Price} ${AvailableBalance}");
@@ -196,7 +195,7 @@ namespace Capstone
                        
                         if (Inventory.stockDictionary[UserInput] != 0)
                         {
-                            UpdateStock(UserInput);
+                            Stock.UpdateStock(UserInput);
                             AvailableBalance -= item.Price;
                             Console.WriteLine("You crack open a cold one with the boys");
                             Audit($"{DateTime.Now}  {item.Name} {item.Location} ${AvailableBalance + item.Price} ${AvailableBalance}");
@@ -225,7 +224,7 @@ namespace Capstone
                         if (Inventory.stockDictionary[UserInput] != 0)
                         {
                             
-                            UpdateStock(UserInput);
+                            Stock.UpdateStock(UserInput);
                             AvailableBalance -= item.Price;
                             Console.WriteLine("Crunch Crunch, Yum!");
                             Audit($"{DateTime.Now}  {item.Name} {item.Location} ${AvailableBalance + item.Price} ${AvailableBalance}");
@@ -253,7 +252,7 @@ namespace Capstone
                     {
                         if (Inventory.stockDictionary[UserInput] != 0)
                         {                            
-                            UpdateStock(UserInput);
+                            Stock.UpdateStock(UserInput);
                             AvailableBalance -= item.Price;
                             Console.WriteLine("Chew Chew, Yum!");
                             Audit($"{DateTime.Now}  {item.Name} {item.Location} ${AvailableBalance + item.Price} ${AvailableBalance}");
@@ -337,8 +336,88 @@ namespace Capstone
         }
 
 
+        public void FeedMoney(string moneyAdded)
+        {
+            
+            decimal moneyAddDecimal = 0.00M;
 
+            if (moneyAdded == "1")
+            {
+                moneyAddDecimal += 1;
+            }
+            if (moneyAdded == "2")
+            {
+                moneyAddDecimal += 2;
+            }
+            if (moneyAdded == "3")
+            {
+                moneyAddDecimal += 5;
+            }
+            if (moneyAdded == "4")
+            {
+                moneyAddDecimal += 10;                
+            }
+            if (moneyAdded != "1"|| moneyAdded != "2" || moneyAdded != "3" || moneyAdded != "4")
+            {
+                PurchaseMenu();
+            }
+            AcceptCurrency(moneyAddDecimal);
+            Console.WriteLine("Your Available Balance is " + ("$" + AvailableBalance));
+            Audit($"{DateTime.Now} FEED MONEY: ${moneyAddDecimal} ${AvailableBalance}");
+            PurchaseMenu();
+        }
 
+        public string InsertMoney()
+        {
+            Console.WriteLine("How much money would you like to add?");
+            Console.WriteLine("(1) - $1.00");
+            Console.WriteLine("(2) - $2.00");
+            Console.WriteLine("(3) - $5.00");
+            Console.WriteLine("(4) - $10.00");
+            Console.WriteLine("(5) - Done Adding Money");
+            string moneyAddedString = Console.ReadLine();
+            return moneyAddedString;
+        }
+
+        public void PurchaseMenu()
+        {
+            Console.WriteLine("(1) Feed Money");
+            Console.WriteLine("(2) Select Product");
+            Console.WriteLine("(3) Finish Transaction");
+            Console.WriteLine($"Current Money Provided: ${AvailableBalance}");
+
+            string userInput = Console.ReadLine();
+
+            if (userInput == "1")
+            {
+                InsertMoney();
+            }
+            else if (userInput == "2")
+            {
+                //Display Inventory
+                DisplayInventory();
+                UserInput = Console.ReadLine();
+                VendItem(UserInput);
+
+                PurchaseMenu();
+            }
+            else if (userInput == "3")
+            {
+                Console.WriteLine("Heh Heh! Thank ya stranger!");
+                ReturnChange();
+                return;
+            }
+            else if (userInput == "4")
+            {
+                Console.WriteLine("THIS SHOULD WRITE A SALES REPORT");
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input");
+                PurchaseMenu();
+            }
+
+        }
 
 
 

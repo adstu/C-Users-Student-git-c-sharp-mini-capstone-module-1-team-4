@@ -57,7 +57,7 @@ namespace Capstone
         
         public static Dictionary<string, int> stockDictionary = new Dictionary<string, int>() { };
 
-        public override void AssignStock()
+        public void AssignStock()
         {
             Dictionary<string, int> itemStock = new Dictionary<string, int>();
             List<string> itemInformation = ImportInventory();
@@ -71,7 +71,7 @@ namespace Capstone
             }
         }
 
-        public override void UpdateStock(string UserInput)
+        public void UpdateStock(string UserInput)
         {
             Inventory.stockDictionary[UserInput] -= 1;
         }
