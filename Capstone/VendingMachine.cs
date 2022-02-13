@@ -17,7 +17,8 @@ namespace Capstone
         //public Inventory Inventory { get; set; }
 
         public int Quarters { get; set; }
-
+        public int Nickel { get; set; }
+        public int Dimes { get; set; }
         public virtual void DisplayInventory() { }
 
         public virtual void AssignStock() { }
@@ -37,7 +38,9 @@ namespace Capstone
 
         public static List<string> ImportInventory()
         {
-            string filePath = $"{mainProjDir}/Capstone/VendingMachineInventory.txt";
+            string currentDirectory = Environment.CurrentDirectory;
+            string file = "VendingMachineInventory.txt";
+            string filePath = Path.Combine(currentDirectory, file);
             
             
             List<string> itemInformation = new List<string>();
@@ -284,26 +287,27 @@ namespace Capstone
                 {
                     int toDimes = newChange % 25;
                     Quarters = newChange / 25;
-                    Console.WriteLine(Quarters + " quarters are available to grab.");
+                    Console.WriteLine(Quarters + " quarter(s) are available to grab.");
                     if (toDimes % 10 != 0)
                     {
                         int toNickel = toDimes % 10;
-                        int dimes = toDimes / 10;
-                        Console.WriteLine(dimes + " dimes are available to grab.");
+                         Dimes = toDimes / 10;
+                        Console.WriteLine(Dimes + " dime(s) are available to grab.");
                         if (toNickel != 0)
                         {
-                            Console.WriteLine("1 nickel available to grab.");
+                            Nickel = 1;
+                            Console.WriteLine( Nickel + " nickel available to grab.");
                         }
                         else
                         {
                             Console.WriteLine("0 nickel available to grab.");
                         }
                     }
-                    else if (newChange % 10 == 0)
+                    else if (toDimes % 10 == 0)
                     {
 
-                        int dimes = newChange / 10;
-                        Console.WriteLine(dimes + " dimes are available to grab.");
+                        Dimes = toDimes / 10;
+                        Console.WriteLine(Dimes + " dimes are available to grab.");
                         Console.WriteLine("0 nickel available to grab.");
                     }
                 }

@@ -18,11 +18,8 @@ namespace CapstoneTests
             vendingMachine.AvailableBalance = 5.00M;
             decimal result = 0.00M;
 
-
-
             //Act
             vendingMachine.ReturnChange();
-
 
             //Assert
             Assert.AreEqual(vendingMachine.AvailableBalance, result);
@@ -37,11 +34,8 @@ namespace CapstoneTests
             vendingMachine.AvailableBalance = 1000.00M;
             decimal result = 0.00M;
 
-
-
             //Act
             vendingMachine.ReturnChange();
-
 
             //Assert
             Assert.AreEqual(vendingMachine.AvailableBalance, result);
@@ -56,11 +50,8 @@ namespace CapstoneTests
             vendingMachine.AvailableBalance = -1.00M;
             decimal result = 0.00M;
 
-
-
             //Act
             vendingMachine.ReturnChange();
-
 
             //Assert
             Assert.AreEqual(vendingMachine.AvailableBalance, result);
@@ -74,64 +65,64 @@ namespace CapstoneTests
             VendingMachine vendingMachine = new VendingMachine() { };
             vendingMachine.AvailableBalance = 1.00M;          
 
-
             //Act
             vendingMachine.ReturnChange();
-
 
             //Assert
             Assert.AreEqual(vendingMachine.Quarters, 4 );
         }
 
-        //[TestMethod]
-        //public void ReturnChange_changeDimes()
-        //{
-        //    //Arrange
-        //    VendingMachine vendingMachine = new VendingMachine() { };
-        //    vendingMachine.AvailableBalance = 1.00M;
-
-
-        //    //Act
-        //    vendingMachine.ReturnChange();
-
-
-        //    //Assert
-        //    Assert.AreEqual(vendingMachine.Quarters, 4);
-        //}
-
-        //[TestMethod]
-        //public void ReturnChange_changeNickel()
-        //{
-        //    //Arrange
-        //    VendingMachine vendingMachine = new VendingMachine() { };
-        //    vendingMachine.AvailableBalance = 1.00M;
-
-
-        //    //Act
-        //    vendingMachine.ReturnChange();
-
-
-        //    //Assert
-        //    Assert.AreEqual(vendingMachine.Quarters, 4);
-        //}
-
         [TestMethod]
-        public void VendingItem_Gum()
+        public void ReturnChange_changeDimes()
         {
             //Arrange
             VendingMachine vendingMachine = new VendingMachine() { };
-            Gum gum = new Gum("name", 1.00M, "A1", "name", 5 );
-            
-            vendingMachine.UserInput = "A1";
-            vendingMachine.AvailableBalance = 1.15M;
-            
-            //Act
-            vendingMachine.VendItem(vendingMachine.UserInput);
+            vendingMachine.AvailableBalance = .45M;
 
-            
+            //Act
+            vendingMachine.ReturnChange();
 
             //Assert
-            Assert.AreEqual(.15, vendingMachine.AvailableBalance);
+            Assert.AreEqual(vendingMachine.Dimes, 2);
+        }
+
+        [TestMethod]
+        public void ReturnChange_changeNickel()
+        {
+            //Arrange
+            VendingMachine vendingMachine = new VendingMachine() { };
+            vendingMachine.AvailableBalance = .40M;
+
+            //Act
+            vendingMachine.ReturnChange();
+
+            //Assert
+            Assert.AreEqual(vendingMachine.Quarters, 1);
+            Assert.AreEqual(vendingMachine.Dimes, 1);
+            Assert.AreEqual(vendingMachine.Nickel, 1);
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"C:\Users\Student\git\c-sharp-mini-capstone-module-1-team-4\Capstone\bin\Debug\netcoreapp3.1\VendingMachineInventory.txt")]
+        public void VendingItem_Gum()
+        {
+
+            //Arrange
+            VendingMachine vendingMachine = new VendingMachine() { };
+            Inventory inventory = new Inventory();
+            //Gum gum = new Gum("name", 1.00M, "A1", "name", 5 );
+
+            vendingMachine.UserInput = "A1";
+            vendingMachine.AvailableBalance = 1.15M;
+            vendingMachine.IsiItOn = true;
+
+            //Act
+            inventory.AssignStock();
+            vendingMachine.VendItem(vendingMachine.UserInput);
+
+            //Assert
+            
+            Assert.AreEqual(.15M, vendingMachine.AvailableBalance);
         }
 
         //[TestMethod]
