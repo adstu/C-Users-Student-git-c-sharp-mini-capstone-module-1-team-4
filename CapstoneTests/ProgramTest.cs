@@ -28,12 +28,13 @@ namespace CapstoneTests
         {
             //Arrange
             VendingMachine vendingMachine = new VendingMachine();
-            string moneyAdded = "1";
             
+            decimal amount = 1.00M;
 
             //Act            
-            vendingMachine.FeedMoney(moneyAdded);
-            
+            vendingMachine.AddBalance(amount);
+               
+
             //Assert
             Assert.AreEqual(vendingMachine.AvailableBalance, 1);
         }

@@ -16,8 +16,8 @@ namespace Capstone
         public bool IsiItOn { get; set; }
 
         public decimal AvailableBalance { get; set; } = 0.00M;
-        
 
+        private static string testTextFile;
 
         public int Quarters { get; set; }
         public int Nickel { get; set; }
@@ -37,16 +37,23 @@ namespace Capstone
 
         public static List<string> ImportInventory()
         {
-            string currentDirectory = Environment.CurrentDirectory;
-            string file = "VendingMachineInventory.txt";
-            string filePath = Path.Combine(currentDirectory, file);
-            
-            
+
+            string currDir = Environment.CurrentDirectory;
+            string mainProjDir = Directory.GetParent(currDir).Parent.Parent.Parent.FullName;
+            mainProjDir = mainProjDir.Replace("\\", "/");
+            testTextFile = $"{mainProjDir}/Capstone/VendingMachineInventory.txt";
+            //Console.WriteLine(testTextFile);
+
+            //string currentDirectory = Environment.CurrentDirectory;
+            //string file = "VendingMachineInventory.txt";
+            //string filePath = Path.Combine(currentDirectory, file);
+
+
             List<string> itemInformation = new List<string>();
 
             try
             {
-                using (StreamReader sr = new StreamReader(filePath))
+                using (StreamReader sr = new StreamReader(testTextFile))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -336,47 +343,47 @@ namespace Capstone
         }
 
 
-        public void FeedMoney(string moneyAdded)
+        public void FeedMoney()
         {
-            
-            decimal moneyAddDecimal = 0.00M;
-
-            if (moneyAdded == "1")
-            {
-                moneyAddDecimal += 1;
-            }
-            if (moneyAdded == "2")
-            {
-                moneyAddDecimal += 2;
-            }
-            if (moneyAdded == "3")
-            {
-                moneyAddDecimal += 5;
-            }
-            if (moneyAdded == "4")
-            {
-                moneyAddDecimal += 10;                
-            }
-            if (moneyAdded != "1"|| moneyAdded != "2" || moneyAdded != "3" || moneyAdded != "4")
-            {
-                PurchaseMenu();
-            }
-            AcceptCurrency(moneyAddDecimal);
-            Console.WriteLine("Your Available Balance is " + ("$" + AvailableBalance));
-            Audit($"{DateTime.Now} FEED MONEY: ${moneyAddDecimal} ${AvailableBalance}");
-            PurchaseMenu();
-        }
-
-        public string InsertMoney()
-        {
-            Console.WriteLine("How much money would you like to add?");
+             Console.WriteLine("How much money would you like to add?");
             Console.WriteLine("(1) - $1.00");
             Console.WriteLine("(2) - $2.00");
             Console.WriteLine("(3) - $5.00");
             Console.WriteLine("(4) - $10.00");
-            Console.WriteLine("(5) - Done Adding Money");
-            string moneyAddedString = Console.ReadLine();
-            return moneyAddedString;
+          
+            UserInput = Console.ReadLine();
+            decimal moneyAddDecimal = 0.00M;
+            // void FeedMoreMoney() { }
+            if (UserInput == "1")
+            {
+                moneyAddDecimal += 1;
+                
+            }
+            if (UserInput == "2")
+            {
+                moneyAddDecimal += 2;
+
+            }
+            if (UserInput == "3")
+            {
+                moneyAddDecimal += 5;
+
+            }
+            if (UserInput == "4")
+            {
+                moneyAddDecimal += 10;
+            }
+            AddBalance(moneyAddDecimal);
+
+            PurchaseMenu();
+
+        }
+
+        public void AddBalance(decimal moneyAddDecimal)
+        {
+            AcceptCurrency(moneyAddDecimal);
+            Console.WriteLine("Your Available Balance is " + ("$" + AvailableBalance));
+            Audit($"{DateTime.Now} FEED MONEY: ${moneyAddDecimal} ${AvailableBalance}");
         }
 
         public void PurchaseMenu()
@@ -390,7 +397,7 @@ namespace Capstone
 
             if (userInput == "1")
             {
-                InsertMoney();
+                FeedMoney();
             }
             else if (userInput == "2")
             {
