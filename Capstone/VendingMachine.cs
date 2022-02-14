@@ -9,7 +9,7 @@ namespace Capstone
     public class VendingMachine
     {
 
-
+        public bool Ending { get; set; }
         public string UserInput { get; set; }
         public bool IsiItOn { get; set; }
         public decimal AvailableBalance { get; set; } = 0.00M;
@@ -221,6 +221,7 @@ namespace Capstone
                 }
                 i++;
             }
+            
             foreach (Chips item in chipsList)
             {
                 if (UserInput == item.Location)
@@ -348,7 +349,8 @@ namespace Capstone
                         if (EasterEggs.EasterEgg1 && EasterEggs.EasterEgg2 && EasterEggs.EasterEgg3)
                         {
                             Console.Clear();
-                            Console.WriteLine("Its Dangerous to go alone, take this, stranger...");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Its Dangerous to go alone, take this....stranger");
                             Console.ReadLine();
                             Console.Write("A secret compartment opens on the right side. You lean over and see a pump action shotgun in the opening. Do you take it? (y/n) ");
                             string takingBoomstick = Console.ReadLine();
@@ -363,18 +365,23 @@ namespace Capstone
                             else
                             {
                                 Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("I'm sure I won't need it, you think to yourself.");
                                 Console.ReadLine();
+                                Ending = true;
+                                return;
                             }
                         }
                         else
                         {
                             Console.WriteLine("Hmm it looks like you're missing one or more and when you turn the keys you do have, nothing happens.");
                             Console.ReadLine();
+                            return;
                         }
                     }
 
                 }
+                
             }
 
         }
@@ -443,6 +450,10 @@ namespace Capstone
             Console.WriteLine("(2) Select Product");
             Console.WriteLine("(3) Finish Transaction");
             Console.WriteLine($"Current Money Provided: ${AvailableBalance}");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("(5) It's a secret to everyone");
+            Console.ForegroundColor = ConsoleColor.White;
+
 
             string userInput = Console.ReadLine();
 
@@ -501,7 +512,7 @@ namespace Capstone
                         if (Inventory.stockDictionary["D2"] == 1)
                         {
                             Console.Clear();
-                            Console.WriteLine("It looks like something else dropped with your cold one...");
+                            Console.WriteLine("It appears something else dropped with your delicious oatmeal stout...");
                             Console.ReadLine();
                             Console.WriteLine("You find a Club Shaped Key.");
                             EasterEggs.EasterEgg2 = true;
@@ -521,6 +532,7 @@ namespace Capstone
                 Console.Clear();
                 Console.WriteLine("Heh Heh! Thank ya stranger!");
                 ReturnChange();
+                Ending = true;
                 Console.ReadLine();
                 return;
             }
@@ -567,7 +579,7 @@ namespace Capstone
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid Input!");
+                Console.WriteLine("Invalid Input...stranger.");
                 Console.ReadLine();
                 PurchaseMenu();
             }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Capstone
 {
-    public class EasterEggs
+    public  class EasterEggs
     {
         public static bool EasterEgg1 { get; set; } = false;
         public static bool EasterEgg2 { get; set; } = false;
@@ -15,6 +15,7 @@ namespace Capstone
 
         public static void BadEndingText()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("You feel a cold hand on your shoulder...");
             Console.ReadLine();
             Console.WriteLine("@@@ @@@   @@@@@@   @@@  @@@      @@@@@@   @@@@@@@   @@@@@@@@     @@@@@@@   @@@@@@@@   @@@@@@   @@@@@@@  ");
@@ -29,10 +30,12 @@ namespace Capstone
             Console.WriteLine("   :      : :  :    : :  :       :   : :   :   : :  : :: ::      :: :  :   : :: ::    :   : :  :: :  :   ");
             Console.ReadLine();
             Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public static void GoodEndingText()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("You feel a cold hand on your shoulder...");
             Console.ReadLine();
             Console.WriteLine("You use your shotgun to blow the zombie's head off!");
@@ -48,15 +51,14 @@ namespace Capstone
             Console.WriteLine(@"                                          -_-                                            '               -_-            '----`");
             Console.ReadLine();
             Console.ReadLine();
-
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public static void Logo()
         {
-            Console.WriteLine(@"           _______________________________");
-            Console.WriteLine(@"         /  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \ ");
-            Console.WriteLine(@"        /    XXXXXXXXXXXXXXXXXXXXXXXXXXXX   \ ");
-            Console.WriteLine(@"       /      XXXXXXXXXXXXXXXXXXXXXXXXXX     \");
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.WriteLine(@"       /-------------------------------------\");
             Console.WriteLine(@"      /        XXXXXXXXXXXXXXXXXXXXXXXX       \");
             Console.WriteLine(@"     /          XXXXXXXXXXXXXXXXXXXXXX         \");
             Console.WriteLine(@"    /            XXXXXXXXXXXXXXXXXXXX           \");
@@ -64,15 +66,15 @@ namespace Capstone
             Console.WriteLine(@"  /                XXXXXXXXXXXXXXXX               \");
             Console.WriteLine(@" /                  XXXXXXXXXXXXXX                 \");
             Console.WriteLine(@"/                    XXXXXXXXXXXX                   \");
-            Console.WriteLine(@"|XXX                  XXXXXXXXXX                  XXX| ");
-            Console.WriteLine(@"|XXXXXXXXX             XXXXXXXX              XXXXXXXX| ");
+            Console.WriteLine(@"|XXX                  XXXXXXXXXX                  XXX|");
+            Console.WriteLine(@"|XXXXXXXXX             XXXXXXXX              XXXXXXXX|");
             Console.WriteLine(@"|XXXXXXXXXXXXXXX        XXXXXX         XXXXXXXXXXXXXX|");
             Console.WriteLine(@"|XXXXXXXXXXXXXXXXXXXX     XX    XXXXXXXXXXXXXXXXXXXXX|");
             Console.WriteLine(@"|XXXXXXXXXXXXXXXXXXXXXXXX XX XXXXXXXXXXXXXXXXXXXXXXXX|");
             Console.WriteLine(@"|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|");
-            Console.WriteLine(@"|XXXXXXXXXXXXXXXXXXXXXXXX XX XXXXXXXXXXXXXXXXXXXXXXXX|  ");
+            Console.WriteLine(@"|XXXXXXXXXXXXXXXXXXXXXXXX XX XXXXXXXXXXXXXXXXXXXXXXXX|");
             Console.WriteLine(@"|XXXXXXXXXXXXXXXXXXXX     XX    XXXXXXXXXXXXXXXXXXXXX|");
-            Console.WriteLine(@"|XXXXXXXXXXXXXXX         XXXX          XXXXXXXXXXXXXX| ");
+            Console.WriteLine(@"|XXXXXXXXXXXXXXX         XXXX          XXXXXXXXXXXXXX|");
             Console.WriteLine(@"|XXXXXXXXX              XXXXXX               XXXXXXXX|");
             Console.WriteLine(@"|XXX                   XXXXXXXX                   XXX|");
             Console.WriteLine(@"\                     XXXXXXXXXX                     /");
@@ -83,18 +85,11 @@ namespace Capstone
             Console.WriteLine(@"     \           XXXXXXXXXXXXXXXXXXXX           /");
             Console.WriteLine(@"      \         XXXXXXXXXXXXXXXXXXXXXX         /");
             Console.WriteLine(@"       \       XXXXXXXXXXXXXXXXXXXXXXXX       /");
-            Console.WriteLine(@"        \     XXXXXXXXXXXXXXXXXXXXXXXXXX     /");
-            Console.WriteLine(@"         \   XXXXXXXXXXXXXXXXXXXXXXXXXXXX   /");
-            Console.WriteLine(@"          \ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX /");
-            Console.WriteLine(@"            ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾                      ");
-
-
-
-
-
+            Console.WriteLine(@"        \------------------------------------/");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
-
+        
 
 
 

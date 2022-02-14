@@ -9,8 +9,8 @@ namespace Capstone
 
         static void Main(string[] args)
         {
-            
-            
+
+
             bool running = true;
             VendingMachine vendoMatic800 = new Inventory();
             Inventory vendoMatic800Inventory = new Inventory();
@@ -26,15 +26,17 @@ namespace Capstone
 
 
             void MainDisplay()
-            {  
+            {
                 while (running)
                 {
                     Console.Clear();
+                    
+                    EasterEggs.Logo();
                     Console.WriteLine("Welcome to the Umbrella Corp. Vendo-Matic800!");
                     Console.WriteLine("What are ya buyin??");
-                    Console.WriteLine("");
-                    EasterEggs.Logo();
+                    
                     Console.ReadLine();
+
                     Console.Clear();
                     Console.WriteLine($"(1) Display Vending Machine Items");
                     Console.WriteLine($"(2) Purchase");
@@ -49,6 +51,8 @@ namespace Capstone
                         Console.WriteLine("You hear a rustling behind you, hurry up!");
                         Console.WriteLine("********************************************************************");
                         Console.ReadLine();
+                        MainDisplay();
+
                     }
                     else if (userInput == "2")
                     {
@@ -59,37 +63,58 @@ namespace Capstone
                     {
                         // Exit Application
                         running = false;
+                        vendoMatic800.Ending = true;
+                        Ending();
                     }
                     else
                     {
-                        Console.WriteLine("Invalid Input");
+                        Console.Write("Invalid Input \n");
+                        Console.ReadLine();
                     }
+
+                 
                 }
-                if (EasterEggs.EasterEgg1)
+                Ending();
+            }
+            
+             void Ending() {
+                
+                if (vendoMatic800.Ending)
                 {
-                    if (EasterEggs.EasterEgg2)
+
+
+                    if (EasterEggs.EasterEgg1)
                     {
-                        if (EasterEggs.EasterEgg3)
+                        if (EasterEggs.EasterEgg2)
                         {
-                            EasterEggs.GoodEndingText();
+                            if (EasterEggs.EasterEgg3 && EasterEggs.Boomstick)
+                            {
+                                EasterEggs.GoodEndingText();
+                                Console.ReadLine();
+                            }
+                            else
+                            {
+                                EasterEggs.BadEndingText();
+                                Console.ReadLine();
+                            }
+                        }
+                        else
+                        {
+                            EasterEggs.BadEndingText();
+                            Console.ReadLine();
                         }
                     }
                     else
                     {
                         EasterEggs.BadEndingText();
+                        Console.ReadLine();
                     }
                 }
-                else 
-                {
-                    EasterEggs.BadEndingText();
-                }
-                
 
 
-            }
 
-            System.Environment.Exit(0);
+                System.Environment.Exit(0);
 
-        }
+            } }
     }
 }
