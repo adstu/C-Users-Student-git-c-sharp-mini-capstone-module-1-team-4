@@ -10,14 +10,12 @@ namespace Capstone
         static void Main(string[] args)
         {
             
-            Console.WriteLine("Welcome to the Umbrella Corp. Vendo-Matic800!");
-            Console.WriteLine("What are ya buyin??");
-            Console.WriteLine(@"/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\");
-            Console.WriteLine("");
+            
             bool running = true;
             VendingMachine vendoMatic800 = new Inventory();
             Inventory vendoMatic800Inventory = new Inventory();
             vendoMatic800Inventory.AssignStock();
+            EasterEggs goodLuck = new EasterEggs();
             //vendoMatic800.DisplayInventory();
             //vendoMatic800.candyInventory();
             //vendoMatic800.gumInventory();
@@ -31,6 +29,13 @@ namespace Capstone
             {  
                 while (running)
                 {
+                    Console.Clear();
+                    Console.WriteLine("Welcome to the Umbrella Corp. Vendo-Matic800!");
+                    Console.WriteLine("What are ya buyin??");
+                    Console.WriteLine("");
+                    EasterEggs.Logo();
+                    Console.ReadLine();
+                    Console.Clear();
                     Console.WriteLine($"(1) Display Vending Machine Items");
                     Console.WriteLine($"(2) Purchase");
                     Console.WriteLine($"(3) Exit");
@@ -43,7 +48,7 @@ namespace Capstone
                         Console.WriteLine("********************************************************************");
                         Console.WriteLine("You hear a rustling behind you, hurry up!");
                         Console.WriteLine("********************************************************************");
-
+                        Console.ReadLine();
                     }
                     else if (userInput == "2")
                     {
@@ -60,7 +65,27 @@ namespace Capstone
                         Console.WriteLine("Invalid Input");
                     }
                 }
-                Console.WriteLine("Thank you, please come again!");
+                if (EasterEggs.EasterEgg1)
+                {
+                    if (EasterEggs.EasterEgg2)
+                    {
+                        if (EasterEggs.EasterEgg3)
+                        {
+                            EasterEggs.GoodEndingText();
+                        }
+                    }
+                    else
+                    {
+                        EasterEggs.BadEndingText();
+                    }
+                }
+                else 
+                {
+                    EasterEggs.BadEndingText();
+                }
+                
+
+
             }
 
             System.Environment.Exit(0);
